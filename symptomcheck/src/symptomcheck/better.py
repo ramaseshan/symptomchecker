@@ -36,7 +36,7 @@ Symptoms are flu
 """
 
 if __name__=='__main__':
-    tests=('I am suffering from cold and cough','I am having flu')
+    tests=('I am suffering from cold and cough','I am having flu','I having headache')
 
     for record in tests:
         result=parse_record(record)
