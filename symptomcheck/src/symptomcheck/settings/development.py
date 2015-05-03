@@ -13,7 +13,7 @@ if "celery" in sys.argv[0]:
 
 # Django Debug Toolbar
 INSTALLED_APPS += (
-    'debug_toolbar.apps.DebugToolbarConfig',
+#    'debug_toolbar.apps.DebugToolbarConfig',
     'symptomcheck',)
 
 # Show emails to console in DEBUG mode
