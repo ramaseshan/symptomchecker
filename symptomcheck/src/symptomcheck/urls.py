@@ -10,6 +10,7 @@ urlpatterns = patterns(
     '',
     #url(r'^$', views.HomePage.as_view(), name='home'),
      url(r'^$', views.HomePage, name='home'),
+     url(r'^learn/$', views.Learn, name='learn'),
     url(r'^about/$', views.AboutPage.as_view(), name='about'),
     url(r'^', include(accounts.urls, namespace='accounts')),
     url(r'^users/', include(profiles.urls, namespace='profiles')),

@@ -40,30 +40,50 @@
 {% block container %}
 <!-- Benefits of the Django application -->
 <a name="about"></a>
-Possible Diseases :
-<div class="container">
+{%if diseases %}
+<div class="container" id="possibilities">
+  <strong><h1>POSSIBLE DISEASES :</h1></strong>
   <div class="row">
+    {% for disease in diseases %}
     <div class="col-lg-4">
-      <h2>Fever</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+      <h2>{{disease.d_name|default_if_none:"Name not found"}}</h2>
+      <p>{{disease.d_desc}}</p>
+      <p>  Symptoms
+          {% for sym in disease.d_symp.all%}
+ 		{{sym}} <br /> 
+          {% endfor %}
+      </p>
+     <p>
+       <button id="{{disease.did}}" class="btn btn-success">This is it</button>
+     </p> 
     </div>
-    <div class="col-lg-4">
-      <h2>Comomn Cold</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-    </div>
-    <div class="col-lg-4">
-      <h2>Sinus</h2>
-      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-    </div>
+    {% endfor %}
   </div>
 </div>
-
+<script>
+	document.getElementById('possibilities').scrollIntoView();
+</script>
+{%endif%}
 {% endblock container %}
 
 {% block scripts %}
 <script src="{% static 'site/js/site.js' %}"></script>
+<script>
+        var symps = " [{%for s in symps%} '{{s}}',{% endfor %}]";
+	$(".btn-success").on('click',function(){
+                var id = this.id;
+		$.ajax({
+			url : "/learn/",
+                        method : "POST",
+			data : {
+				'csrfmiddlewaretoken' : "{{csrf_token}}",
+				'symptoms': symps,
+ 				'id': id,
+			},
+			success : function(data){alert("Thanks for letting us know.")},
+			error : function(data){alert("Some code messed up. Sorry. Mind trying once again ?")}		
+		});
+	});
+</script>
 {% endblock scripts %}
 
