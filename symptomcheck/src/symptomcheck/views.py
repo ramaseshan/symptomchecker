@@ -1,13 +1,14 @@
 from django.views import generic
 from django.shortcuts import render
-import better
+import better,check_sym, diseases
+from .models import Symptoms, Disease
 
 def HomePage(request):
     if request.method == "POST":
-        print request.POST
         symps = better.parse_record(str(request.POST.get("symptoms")))
-        print symps  
-        return render(request, 'home.html', {})
+        symps = check_sym.check_and_add_sym(symps)
+        print diseases.get_diseases(symps)
+        return render(request, 'home.html', {'symps':symps})
     else:
         return render(request, 'home.html', {})
 

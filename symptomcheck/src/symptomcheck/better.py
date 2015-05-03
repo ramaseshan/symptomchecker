@@ -5,7 +5,6 @@ unwanted_pat = re.compile(r'\b(have|having|suffering|feeling|am|is|from|and)\b',
 symptom_pat=re.compile(r'[,-]')
 
 def parse_record(astr):
-    print astr
     match=unwanted_pat.search(astr)    
     if match:
         astr=unwanted_pat.sub('',astr)
@@ -18,12 +17,11 @@ def parse_record(astr):
     else: print('Can not find sex.Does it matter ?')
 
     astr=astr.replace('and',' ')    
-    symptoms=[s.strip() for s in symptom_pat.split(astr)]
-    for s in symptoms:
-		print "Symptoms are " + ",".join(s.split())
-    return {
-            'Symptoms': symptoms,
-            }
+    symptoms = []
+    for s in astr.split(" "):
+        if s and s is not None:
+            symptoms.append(s)
+    return symptoms
 
 """
 Sample answer :
