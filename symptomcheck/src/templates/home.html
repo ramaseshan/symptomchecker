@@ -25,7 +25,7 @@
           <h1>&nbsp;&nbsp;&nbsp;&nbsp;{% include "_brandname.html" %}</h1>
 		  <form class="form" method="post" action="." >
 			{%csrf_token%}
-            <input type="text" placeholder="Enter your symptoms" class="form-control input-lg" name="symptoms" />
+            <input type="text" placeholder="Enter your symptoms" class="form-control input-lg" name="symptoms" value={{inputed}} />
 			<br />
 			<br />
 			<input type="submit" class="btn btn-primary btn-block" value="Search" />
@@ -42,15 +42,17 @@
 <a name="about"></a>
 {%if diseases %}
 <div class="container" id="possibilities">
+  <strong><h1>POSSIBLE SYMPTOMS:
+     {%for symp in symps %}{{symp}},{%endfor%}</h1></strong>
   <strong><h1>POSSIBLE DISEASES :</h1></strong>
   <div class="row">
     {% for disease in diseases %}
     <div class="col-lg-4">
       <h2>{{disease.d_name|default_if_none:"Name not found"}}</h2>
       <p>{{disease.d_desc}}</p>
-      <p>  Symptoms
+      <p><strong>  Symptoms: </strong><br />
           {% for sym in disease.d_symp.all%}
- 		{{sym}} <br /> 
+ 		{{sym|title}} <br /> 
           {% endfor %}
       </p>
      <p>
