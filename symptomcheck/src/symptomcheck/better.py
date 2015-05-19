@@ -1,7 +1,7 @@
 import re
 import sys
 sex_pat=re.compile(r'\b(he|she|I)\b',re.IGNORECASE)
-unwanted_pat = re.compile(r'\b(have|having|suffering|feeling|am|is|from|and)\b',re.IGNORECASE)
+unwanted_pat = re.compile(r'\b(have|having|suffering|feeling|am|of|is|from|and)\b',re.IGNORECASE)
 symptom_pat=re.compile(r'[,-]')
 
 def parse_record(astr):

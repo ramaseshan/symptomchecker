@@ -7,19 +7,21 @@ from .models import Symptoms, Disease
 # This is incomplete
 
 def sublists(symps):
-    # sample input [1,2,3] Ex Output [[1],[2],[3],[1,2],[2,3],[1,3],[1,2,3]] 
-    length = len(symps)
-    i = 0
-    poss = []
-    while i < length:
-        size = length - i
-        print [sublist for sublist in (symps[x:x+size] for x in range(len(symps) - size + 1))]
-        i = i +1
-    return poss
+    import itertools
+    combs = []
+
+    for i in xrange(1, len(symps)+1):
+        els = [list(x) for x in itertools.combinations(symps, i)]
+        combs.extend(els)
+    return combs
 
 def get_diseases(symps,possibilities):
     proab_diseases = []
-    #ordered_disease = []
+    ordered_disease = []
     # Get all the diseases that has atlease one of the symptoms.
     proab_diseases = Disease.objects.filter(d_symp__in=symps).distinct()
+    for disease in proab_diseases:
+        for s in disease.d_symp.all():
+            if s in symps:
+                print s 
     return proab_diseases
