@@ -25,7 +25,7 @@
           <h1>&nbsp;&nbsp;&nbsp;&nbsp;{% include "_brandname.html" %}</h1>
 		  <form class="form" method="post" action="." >
 			{%csrf_token%}
-            <input type="text" placeholder="Enter your symptoms" class="form-control input-lg" name="symptoms" value={{inputed}} />
+            <input type="text" placeholder="Enter your symptoms" class="form-control input-lg" name="symptoms" />
 			<br />
 			<br />
 			<input type="submit" class="btn btn-primary btn-block" value="Search" />
@@ -55,7 +55,22 @@
  		{{sym|title}} <br /> 
           {% endfor %}
       </p>
-     <p>
+      <p>
+        {%if disease.d_doctor_1%}
+            {{disease.d_doctor_1}}
+        {%endif%}
+      </p>
+      <p>
+        {%if disease.d_doctor_2%}
+            {{disease.d_doctor_2}}
+        {%endif%}
+      </p>
+      <p>
+        {%if disease.d_doctor_3%}
+            {{disease.d_doctor_3}}
+        {%endif%}
+      </p>
+    <p>
        <button id="{{disease.did}}" class="btn btn-success">This is it</button>
      </p> 
     </div>

@@ -9,7 +9,6 @@ def HomePage(request):
         symps = better.parse_record(str(request.POST.get("symptoms")))
         symptoms = check_sym.check_and_add_sym(symps)
         possibilities = diseases.sublists(symptoms)
-        print possibilities[::-1]
         disease_list = diseases.get_diseases(symptoms,possibilities)
         return render(request, 'home.html', {'symps':symps,'diseases':disease_list})
     else:
@@ -17,7 +16,6 @@ def HomePage(request):
 
 def Learn(request):
     if request.is_ajax():
-    #if request.method == dd
         id = request.POST.get('id')
         symps = request.POST.get('symptoms')
         disease = Disease.objects.get(did=id)
