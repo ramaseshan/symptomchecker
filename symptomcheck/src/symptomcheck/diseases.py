@@ -10,7 +10,6 @@ from django.db.models import Q
 def sublists(symps):
     import itertools
     combs = []
-
     for i in xrange(1, len(symps)+1):
         els = [list(x) for x in itertools.combinations(symps, i)]
         combs.extend(els)

@@ -5,7 +5,7 @@ class Symptoms(models.Model):
     sym_name = models.CharField(max_length=100,blank=False,null=False)
     
     def __unicode__(self):
-        return self.sym_name
+        return (self.sym_name).lower()
 
 class Disease(models.Model):
     did = models.AutoField(primary_key=True)
