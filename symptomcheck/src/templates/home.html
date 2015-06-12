@@ -47,7 +47,7 @@
   <strong><h1>POSSIBLE DISEASES :</h1></strong>
   <div class="row">
     {% for disease in diseases %}
-    <div class="col-lg-4">
+    <div class="col-lg-12">
       <h2>{{disease.d_name|default_if_none:"Name not found"}}</h2>
       <p>{{disease.d_desc}}</p>
       <p><strong>  Symptoms: </strong><br />
@@ -55,25 +55,27 @@
  		{{sym|title}} <br /> 
           {% endfor %}
       </p>
+	<strong>  Doctors you may contact :</strong> <br />
       <p>
-        {%if disease.d_doctor_1%}
-            {{disease.d_doctor_1}}
+        {%if disease.d_doctor1%}
+           1.  {{disease.d_doctor1}}
         {%endif%}
       </p>
       <p>
-        {%if disease.d_doctor_2%}
-            {{disease.d_doctor_2}}
+        {%if disease.d_doctor2%}
+           2.  {{disease.d_doctor2}}
         {%endif%}
       </p>
       <p>
-        {%if disease.d_doctor_3%}
-            {{disease.d_doctor_3}}
+        {%if disease.d_doctor3%}
+           3. {{disease.d_doctor3}}
         {%endif%}
       </p>
     <p>
        <button id="{{disease.did}}" class="btn btn-success">This is it</button>
      </p> 
     </div>
+    <hr/>
     {% endfor %}
   </div>
 </div>
